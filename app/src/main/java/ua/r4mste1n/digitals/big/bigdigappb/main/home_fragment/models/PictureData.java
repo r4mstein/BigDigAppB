@@ -7,9 +7,19 @@ import java.io.Serializable;
  */
 @SuppressWarnings("unused")
 public final class PictureData implements Serializable {
+    private long mId;
     private String mLink;
     private String mTime;
     private int mStatus;
+
+    public long getId() {
+        return mId;
+    }
+
+    public PictureData setId(long id) {
+        mId = id;
+        return this;
+    }
 
     public String getLink() {
         return mLink;
