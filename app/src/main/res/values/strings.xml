@@ -2,4 +2,5 @@
     <string name="app_name">BigDigAppB</string>
     <string name="picture">Picture</string>
     <string name="close_message">The BigDigAppB can\'t work without BigDigAppA and will be closed after a few seconds</string>
+    <string name="show_picture_error_message">Something went wrong, can\'t show a picture from your link</string>
 </resources>

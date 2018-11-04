@@ -8,4 +8,6 @@ import ua.r4mste1n.digitals.big.bigdigappb.root.base.INavigator;
  */
 public interface IMainNavigator extends INavigator {
     void showHomeFragment(PictureData _data);
+
+    void showMessage(String _message);
 }

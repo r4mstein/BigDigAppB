@@ -9,7 +9,7 @@ import java.io.Serializable;
 public final class PictureData implements Serializable {
     private long mId;
     private String mLink;
-    private String mTime;
+    private long mTime;
     private int mStatus;
 
     public long getId() {
@@ -30,11 +30,11 @@ public final class PictureData implements Serializable {
         return this;
     }
 
-    public String getTime() {
+    public long getTime() {
         return mTime;
     }
 
-    public PictureData setTime(String time) {
+    public PictureData setTime(long time) {
         mTime = time;
         return this;
     }

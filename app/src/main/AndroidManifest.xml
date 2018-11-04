@@ -3,6 +3,7 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="ua.r4mste1n.digitals.big.bigdigappb">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="ua.r4mste1n.digitals.big.bigdigappa.READ_WRITE"/>
     <uses-permission android:name="android.permission.READ_USER_DICTIONARY"/>

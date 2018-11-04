@@ -16,6 +16,8 @@ import ua.r4mste1n.digitals.big.bigdigappb.main.navigator.IMainContract.State;
 import ua.r4mste1n.digitals.big.bigdigappb.root.base.BaseActivity;
 import ua.r4mste1n.digitals.big.bigdigappb.root.db_manager.Constants.ColumnNames;
 
+import static ua.r4mste1n.digitals.big.bigdigappb.main.Constants.Value.DEFAULT_VALUE;
+
 public final class MainActivity extends BaseActivity<IMainNavigator, IMainContract.Model>
         implements IMainContract.Presenter, IMainNavigator {
 
@@ -68,10 +70,10 @@ public final class MainActivity extends BaseActivity<IMainNavigator, IMainContra
         if (_intent.getAction() != null && _intent.getAction().equals(ACTION)) {
             mState = State.FROM_APP_A;
             final PictureData data = new PictureData();
-            data.setId(_intent.getLongExtra(ColumnNames.COLUMN_ID, -1));
+            data.setId(_intent.getLongExtra(ColumnNames.COLUMN_ID, DEFAULT_VALUE));
             data.setLink(_intent.getStringExtra(ColumnNames.COLUMN_URL));
-            data.setStatus(_intent.getIntExtra(ColumnNames.COLUMN_STATUS, -1));
-            data.setTime(_intent.getStringExtra(ColumnNames.COLUMN_DATE));
+            data.setStatus(_intent.getIntExtra(ColumnNames.COLUMN_STATUS, DEFAULT_VALUE));
+            data.setTime(_intent.getLongExtra(ColumnNames.COLUMN_DATE, DEFAULT_VALUE));
             showHomeFragment(data);
         } else {
             mState = State.FROM_LAUNCHER;
@@ -91,6 +93,13 @@ public final class MainActivity extends BaseActivity<IMainNavigator, IMainContra
     @Override
     public final void showHomeFragment(final PictureData _data) {
         replaceFragment(R.id.flRootContainer_AM, HomeFragment.newInstance(_data));
+    }
+
+    @DebugLog
+    @Override
+    public final void showMessage(final String _message) {
+        tvMessage.setText(_message);
+        rlMessageContainer.setVisibility(View.VISIBLE);
     }
 
     @DebugLog
