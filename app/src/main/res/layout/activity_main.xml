@@ -17,4 +17,40 @@
         android:layout_below="@id/toolbar_AH"
         />
 
+    <RelativeLayout
+        android:id="@+id/rlMessageContainer_AM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvMessage_AM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/firasans_regular"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            tools:text="Message"
+            />
+
+        <TextView
+            android:id="@+id/tvTime_AM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvMessage_AM"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/firasans_medium"
+            android:textColor="@color/colorPrimary"
+            android:textSize="32sp"
+            android:visibility="gone"
+            tools:text="00"
+            />
+
+    </RelativeLayout>
+
 </RelativeLayout>

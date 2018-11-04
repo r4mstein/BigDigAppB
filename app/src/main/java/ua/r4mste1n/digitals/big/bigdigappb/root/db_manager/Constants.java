@@ -14,7 +14,7 @@ public final class Constants {
         Uri URI_LINK            = android.net.Uri.parse("content://" + AUTHORITY + "/" + TABLE_NAME);
     }
 
-    interface ColumnNames {
+    public interface ColumnNames {
         String COLUMN_ID        = BaseColumns._ID;
         String COLUMN_URL       = "url";
         String COLUMN_DATE      = "date";
