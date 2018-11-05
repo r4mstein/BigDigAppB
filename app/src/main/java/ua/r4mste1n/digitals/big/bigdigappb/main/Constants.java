@@ -14,4 +14,8 @@ public final class Constants {
     public interface Value {
         int DEFAULT_VALUE   = -1;
     }
+
+    public interface ServiceKeys {
+        String DATA_KEY     = "data_key";
+    }
 }

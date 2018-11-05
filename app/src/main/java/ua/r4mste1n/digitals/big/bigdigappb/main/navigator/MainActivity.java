@@ -1,11 +1,15 @@
 package ua.r4mste1n.digitals.big.bigdigappb.main.navigator;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import hugo.weaving.DebugLog;
@@ -15,6 +19,7 @@ import ua.r4mste1n.digitals.big.bigdigappb.main.home_fragment.models.PictureData
 import ua.r4mste1n.digitals.big.bigdigappb.main.navigator.IMainContract.State;
 import ua.r4mste1n.digitals.big.bigdigappb.root.base.BaseActivity;
 import ua.r4mste1n.digitals.big.bigdigappb.root.db_manager.Constants.ColumnNames;
+import ua.r4mste1n.digitals.big.bigdigappb.root.permissions.IPermissionsManager;
 
 import static ua.r4mste1n.digitals.big.bigdigappb.main.Constants.Value.DEFAULT_VALUE;
 
@@ -33,6 +38,9 @@ public final class MainActivity extends BaseActivity<IMainNavigator, IMainContra
     @BindView(R.id.tvTime_AM)
     TextView tvTime;
 
+    @Inject
+    IPermissionsManager mPermissionsManager;
+    private String[] mPermissions = new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE };
     private State mState;
 
     @DebugLog
@@ -49,15 +57,17 @@ public final class MainActivity extends BaseActivity<IMainNavigator, IMainContra
         setContentView(R.layout.activity_main);
         bindView(this);
         setupUI();
-        setupIntentData(getIntent());
+        checkPermissions();
     }
 
+    @DebugLog
     @Override
-    protected void onStart() {
-        super.onStart();
-        if (mState != null && mState == State.FROM_LAUNCHER) mModel.startTimer();
+    protected void onRestart() {
+        super.onRestart();
+        checkPermissions();
     }
 
+    @DebugLog
     @Override
     protected void onStop() {
         super.onStop();
@@ -66,9 +76,36 @@ public final class MainActivity extends BaseActivity<IMainNavigator, IMainContra
     }
 
     @DebugLog
+    private void checkPermissions() {
+        if (mPermissionsManager.isGranted(this, mPermissions[0])) {
+            setupIntentData(getIntent());
+        } else {
+            mPermissionsManager.getPermissions(this, mPermissions, new IPermissionsManager.Callback() {
+                @Override
+                public void granted() {
+                    setupIntentData(getIntent());
+                }
+
+                @Override
+                public void deniedWithoutAskNeverAgain() {
+                    Toast.makeText(MainActivity.this, R.string.error_permissions, Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+
+                @Override
+                public void deniedWithAskNeverAgain() {
+                    showPermissionDeniedDialog();
+                }
+            });
+        }
+    }
+
+    @DebugLog
     private void setupIntentData(final Intent _intent) {
         if (_intent.getAction() != null && _intent.getAction().equals(ACTION)) {
             mState = State.FROM_APP_A;
+            if (getSupportFragmentManager().getFragments().size() > 0) return;
+
             final PictureData data = new PictureData();
             data.setId(_intent.getLongExtra(ColumnNames.COLUMN_ID, DEFAULT_VALUE));
             data.setLink(_intent.getStringExtra(ColumnNames.COLUMN_URL));
@@ -80,6 +117,7 @@ public final class MainActivity extends BaseActivity<IMainNavigator, IMainContra
             tvMessage.setText(R.string.close_message);
             tvTime.setVisibility(View.VISIBLE);
             rlMessageContainer.setVisibility(View.VISIBLE);
+            mModel.startTimer();
         }
     }
 

@@ -2,5 +2,15 @@
     <string name="app_name">BigDigAppB</string>
     <string name="picture">Picture</string>
     <string name="close_message">The BigDigAppB can\'t work without BigDigAppA and will be closed after a few seconds</string>
+
     <string name="show_picture_error_message">Something went wrong, can\'t show a picture from your link</string>
+    <string name="error_permissions">Permissions not granted</string>
+    <string name="error_permission_message">Some of permissions not granted. Do you want to provide the permissions?</string>
+
+    <string name="text_ok">OK</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="settings">Settings</string>
+
+    <string name="picture_not_saved">Can\'t save picture to sd card</string>
+    <string name="picture_saved">Picture saved to sd card</string>
 </resources>
