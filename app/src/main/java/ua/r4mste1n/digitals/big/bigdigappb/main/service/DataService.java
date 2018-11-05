@@ -81,7 +81,7 @@ public final class DataService extends IntentService {
         notificationBuilder
                 .setContentTitle(getText(R.string.app_name))
                 .setContentText(message)
-                .setSmallIcon(R.mipmap.ic_launcher_b_round)
+                .setSmallIcon(R.mipmap.ic_launcher_foreground)
                 .setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_SOUND);
 
